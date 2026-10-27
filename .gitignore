@@ -1,0 +1,7 @@
+/target
+
+# makepkg output when testing the PKGBUILDs in place
+/packaging/aur/*/src/
+/packaging/aur/*/pkg/
+/packaging/aur/*/pinhole/
+/packaging/aur/*/*.tar.*

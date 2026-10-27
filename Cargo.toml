@@ -1,0 +1,25 @@
+[package]
+name = "pinhole"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.87"
+description = "macOS-style screenshots and screen recordings for Hyprland and sway"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/chrischriscris/pinhole"
+readme = "README.md"
+keywords = ["screenshot", "screen-recording", "wayland", "hyprland", "sway"]
+categories = ["multimedia::images", "multimedia::video", "gui"]
+exclude = ["/docs", "/.github", "/packaging", "/extras"]
+
+[dependencies]
+gtk = { package = "gtk4", version = "0.10", features = ["v4_12"] }
+gtk4-layer-shell = "0.6"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.9"
+libc = "0.2"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true

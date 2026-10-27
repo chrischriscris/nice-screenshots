@@ -1,0 +1,32 @@
+[Desktop Entry]
+Type=Application
+Name=Pinhole
+GenericName=Screenshot
+Comment=Take screenshots and record the screen
+Exec=pinhole
+Icon=applets-screenshooter
+Terminal=false
+Categories=Utility;
+Keywords=screenshot;screen;capture;record;recording;video;
+StartupNotify=false
+Actions=Region;Window;Screen;RecordRegion;RecordScreen;
+
+[Desktop Action Region]
+Name=Capture Selected Portion
+Exec=pinhole region
+
+[Desktop Action Window]
+Name=Capture Window
+Exec=pinhole window
+
+[Desktop Action Screen]
+Name=Capture Entire Screen
+Exec=pinhole screen
+
+[Desktop Action RecordRegion]
+Name=Record Selected Portion
+Exec=pinhole record-region
+
+[Desktop Action RecordScreen]
+Name=Record Entire Screen
+Exec=pinhole record-screen

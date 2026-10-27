@@ -1,0 +1,227 @@
+/* Loaded above the user's own gtk.css, and every class is prefixed, so desktop
+   themes can't restyle pinhole. Buttons also drop whatever a theme layers on top. */
+
+window.pinhole {
+  background: none;
+  color: #f2f2f7;
+}
+
+window.pinhole button {
+  background-image: none;
+  text-shadow: none;
+  -gtk-icon-shadow: none;
+  outline: none;
+}
+
+/* Toolbar */
+
+.ph-toolbar {
+  background-color: rgba(30, 30, 32, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 5px;
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
+}
+
+.ph-toolbar button {
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: #f2f2f7;
+  min-height: 0;
+  min-width: 0;
+  padding: 6px 9px;
+  border-radius: 9px;
+  transition: background-color 120ms ease;
+}
+
+.ph-toolbar button:hover {
+  background-color: rgba(255, 255, 255, 0.09);
+}
+
+.ph-toolbar button.ph-mode:checked {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.ph-toolbar .ph-sep {
+  background-color: rgba(255, 255, 255, 0.14);
+  min-width: 1px;
+  margin: 8px 5px;
+}
+
+.ph-toolbar menubutton.ph-options > button {
+  padding: 6px 10px;
+  font-weight: 500;
+}
+
+.ph-toolbar button.ph-capture {
+  background-color: #0a84ff;
+  color: white;
+  padding: 6px 18px;
+  margin-left: 4px;
+  font-weight: 600;
+}
+
+.ph-toolbar button.ph-capture:hover {
+  background-color: #2a95ff;
+}
+
+.ph-toolbar button.ph-capture:disabled {
+  background-color: rgba(10, 132, 255, 0.35);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+popover.ph-options-popover > contents {
+  background-color: rgba(38, 38, 40, 0.97);
+  color: #f2f2f7;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 8px 14px 10px 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+popover.ph-options-popover > arrow {
+  background-color: rgba(38, 38, 40, 0.97);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+popover.ph-options-popover checkbutton {
+  padding: 2px 0;
+  color: #f2f2f7;
+}
+
+popover.ph-options-popover checkbutton label {
+  color: #f2f2f7;
+}
+
+popover.ph-options-popover check,
+popover.ph-options-popover radio {
+  background-color: rgba(255, 255, 255, 0.12);
+  background-image: none;
+  border: none;
+  box-shadow: none;
+  color: white;
+}
+
+popover.ph-options-popover check:checked,
+popover.ph-options-popover radio:checked {
+  background-color: #0a84ff;
+}
+
+.ph-empty {
+  color: rgba(235, 235, 245, 0.45);
+  margin: 2px 0 2px 6px;
+}
+
+.ph-heading {
+  font-size: 0.82em;
+  font-weight: 600;
+  color: rgba(235, 235, 245, 0.55);
+  margin: 8px 0 2px 6px;
+}
+
+/* Floating thumbnail */
+
+.ph-card {
+  background-color: rgba(30, 30, 32, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 6px;
+  margin: 18px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.ph-card .ph-preview {
+  border-radius: 9px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.ph-card .ph-badge {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 6px;
+  padding: 1px 7px;
+  margin: 8px;
+  font-size: 0.85em;
+  font-weight: 600;
+  font-feature-settings: "tnum";
+}
+
+.ph-card button {
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: #f2f2f7;
+  min-height: 0;
+  min-width: 0;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.ph-card button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.ph-card button.ph-close {
+  background-color: rgba(0, 0, 0, 0.55);
+  border-radius: 999px;
+  padding: 2px;
+  margin: 6px;
+}
+
+/* Countdown and recording indicator */
+
+.ph-countdown {
+  background-color: rgba(30, 30, 32, 0.88);
+  border-radius: 30px;
+  min-width: 128px;
+  min-height: 128px;
+  margin: 24px;
+  font-size: 64px;
+  font-weight: 700;
+  font-feature-settings: "tnum";
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
+}
+
+.ph-pill {
+  background-color: rgba(30, 30, 32, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 3px 4px 3px 12px;
+  margin: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.ph-rec-dot {
+  background-color: #ff453a;
+  border-radius: 999px;
+  min-width: 9px;
+  min-height: 9px;
+  animation: ph-rec-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes ph-rec-pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+.ph-rec-time {
+  font-weight: 600;
+  font-feature-settings: "tnum";
+}
+
+.ph-pill button.ph-rec-stop {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  box-shadow: none;
+  color: #f2f2f7;
+  border-radius: 999px;
+  min-height: 0;
+  min-width: 0;
+  padding: 4px;
+}
+
+.ph-pill button.ph-rec-stop:hover {
+  background-color: rgba(255, 69, 58, 0.85);
+}
