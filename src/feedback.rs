@@ -29,7 +29,7 @@ pub fn flash(app: &gtk::Application, output: &str, rect: Option<Rect>) {
     );
     let area_rect = rect.unwrap_or(mon).relative_to(&mon);
 
-    let win = ui::layer_window(app, "pinhole-flash");
+    let win = ui::layer_window(app, "nice-screenshots-flash");
     win.set_monitor(Some(&monitor));
     for edge in [Edge::Top, Edge::Bottom, Edge::Left, Edge::Right] {
         win.set_anchor(edge, true);

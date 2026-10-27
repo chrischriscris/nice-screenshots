@@ -1,4 +1,4 @@
-//! Single-instance application: every `pinhole …` invocation is forwarded to the running
+//! Single-instance application: every `nice-screenshots …` invocation is forwarded to the running
 //! instance over D-Bus, which is how a second key press can stop a recording.
 
 use std::cell::{Cell, RefCell};
@@ -17,7 +17,7 @@ use crate::overlay::{Overlay, Selection};
 use crate::record::{self, Recording};
 use crate::{capture, feedback, indicator, thumbnail, ui, util};
 
-pub const APP_ID: &str = "io.github.chrischriscris.Pinhole";
+pub const APP_ID: &str = "io.github.chrischriscris.NiceScreenshots";
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub enum Command {
@@ -52,23 +52,23 @@ pub fn run(args: &[String]) -> glib::ExitCode {
         .build();
     app.connect_startup(|_| ui::load_css());
 
-    let instance: RefCell<Option<Rc<Pinhole>>> = RefCell::default();
+    let instance: RefCell<Option<Rc<App>>> = RefCell::default();
     app.connect_command_line(move |app, cmdline| {
-        let ph = instance
+        let app_state = instance
             .borrow_mut()
-            .get_or_insert_with(|| Pinhole::new(app))
+            .get_or_insert_with(|| App::new(app))
             .clone();
         let args = cmdline.arguments();
         let arg = args.get(1).and_then(|a| a.to_str()).unwrap_or("");
         if let Some(cmd) = Command::parse(arg) {
-            ph.dispatch(cmd);
+            app_state.dispatch(cmd);
         }
         glib::ExitCode::SUCCESS
     });
     app.run_with_args(args)
 }
 
-struct Pinhole {
+struct App {
     app: gtk::Application,
     cfg: Config,
     opts: Rc<RefCell<Options>>,
@@ -80,7 +80,7 @@ struct Pinhole {
     busy: Cell<bool>,
 }
 
-impl Pinhole {
+impl App {
     fn new(app: &gtk::Application) -> Rc<Self> {
         record::write_status(None);
         if util::which("pactl") {

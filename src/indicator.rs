@@ -10,9 +10,9 @@ use crate::icons::Icon;
 use crate::{ui, util};
 
 pub async fn countdown(app: &gtk::Application, seconds: u32) {
-    let win = ui::layer_window(app, "pinhole-countdown");
+    let win = ui::layer_window(app, "nice-screenshots-countdown");
     let label = gtk::Label::new(None);
-    label.add_css_class("ph-countdown");
+    label.add_css_class("ns-countdown");
     win.set_child(Some(&label));
     win.present();
     for n in (1..=seconds).rev() {
@@ -29,22 +29,22 @@ pub fn recording(
     started: Instant,
     on_stop: impl Fn() + 'static,
 ) -> gtk::Window {
-    let win = ui::layer_window(app, "pinhole-indicator");
+    let win = ui::layer_window(app, "nice-screenshots-indicator");
     win.set_anchor(Edge::Top, true);
     win.set_margin(Edge::Top, 8);
 
     let pill = gtk::Box::new(gtk::Orientation::Horizontal, 8);
-    pill.add_css_class("ph-pill");
+    pill.add_css_class("ns-pill");
 
     let dot = gtk::Box::new(gtk::Orientation::Horizontal, 0);
-    dot.add_css_class("ph-rec-dot");
+    dot.add_css_class("ns-rec-dot");
     dot.set_valign(gtk::Align::Center);
 
     let time = gtk::Label::new(Some("0:00"));
-    time.add_css_class("ph-rec-time");
+    time.add_css_class("ns-rec-time");
 
     let stop = ui::icon_button(Icon::Stop, 16, "Stop recording");
-    stop.add_css_class("ph-rec-stop");
+    stop.add_css_class("ns-rec-stop");
     stop.connect_clicked(move |_| on_stop());
 
     pill.append(&dot);

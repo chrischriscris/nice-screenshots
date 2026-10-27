@@ -7,7 +7,7 @@ use serde::{Deserialize, Serialize};
 use crate::geometry::Rect;
 use crate::util;
 
-/// User configuration, read from `~/.config/pinhole/config.toml`.
+/// User configuration, read from `~/.config/nice-screenshots/config.toml`.
 #[derive(Debug, Deserialize)]
 #[serde(default)]
 pub struct Config {
@@ -64,12 +64,12 @@ impl Default for Config {
 
 impl Config {
     pub fn load() -> Self {
-        let path = glib::user_config_dir().join("pinhole/config.toml");
+        let path = glib::user_config_dir().join("nice-screenshots/config.toml");
         let Ok(text) = fs::read_to_string(&path) else {
             return Self::default();
         };
         toml::from_str(&text).unwrap_or_else(|e| {
-            util::notify("Pinhole config error", &format!("{}: {e}", path.display()));
+            util::notify("Config error", &format!("{}: {e}", path.display()));
             Self::default()
         })
     }
@@ -149,7 +149,7 @@ pub struct SavedRegion {
     pub rect: Rect,
 }
 
-/// Toolbar options, persisted between runs in `~/.local/state/pinhole/options.json`.
+/// Toolbar options, persisted between runs in `~/.local/state/nice-screenshots/options.json`.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(default)]
 pub struct Options {

@@ -1,11 +1,11 @@
 [package]
-name = "pinhole"
+name = "nice-screenshots"
 version = "0.1.0"
 edition = "2024"
 rust-version = "1.87"
 description = "macOS-style screenshots and screen recordings for Hyprland and sway"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/chrischriscris/pinhole"
+repository = "https://github.com/chrischriscris/nice-screenshots"
 readme = "README.md"
 keywords = ["screenshot", "screen-recording", "wayland", "hyprland", "sway"]
 categories = ["multimedia::images", "multimedia::video", "gui"]

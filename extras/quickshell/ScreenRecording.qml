@@ -3,8 +3,8 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
 
-// Stop button shown while pinhole is recording, like the one in the macOS menu bar.
-// pinhole writes $XDG_RUNTIME_DIR/pinhole/status.json when a recording starts and stops.
+// Stop button shown while nice-screenshots is recording, like the one in the macOS menu bar.
+// nice-screenshots writes $XDG_RUNTIME_DIR/nice-screenshots/status.json when a recording starts and stops.
 Item {
     id: root
 
@@ -16,7 +16,7 @@ Item {
 
     FileView {
         id: status
-        path: Quickshell.env("XDG_RUNTIME_DIR") + "/pinhole/status.json"
+        path: Quickshell.env("XDG_RUNTIME_DIR") + "/nice-screenshots/status.json"
         printErrors: false
         watchChanges: true
         onFileChanged: reload()
@@ -30,7 +30,7 @@ Item {
         onLoadFailed: root.recording = false
     }
 
-    // The status file may not exist until pinhole first runs, which file watching can miss.
+    // The status file may not exist until nice-screenshots first runs, which file watching can miss.
     Timer {
         interval: 2000
         running: true
@@ -40,7 +40,7 @@ Item {
 
     Process {
         id: stop
-        command: ["pinhole", "stop"]
+        command: ["nice-screenshots", "stop"]
     }
 
     IconImage {

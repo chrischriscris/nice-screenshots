@@ -31,7 +31,7 @@ impl Desktop {
             return Desktop::default();
         };
         result.unwrap_or_else(|e| {
-            eprintln!("pinhole: {e}");
+            eprintln!("nice-screenshots: {e}");
             Desktop::default()
         })
     }

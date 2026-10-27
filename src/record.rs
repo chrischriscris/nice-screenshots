@@ -142,7 +142,7 @@ struct AudioMix {
     modules: Vec<String>,
 }
 
-const MIX_SINK: &str = "pinhole_mix";
+const MIX_SINK: &str = "nice_screenshots_mix";
 
 impl AudioMix {
     fn new(mic: &str) -> Result<Self, String> {
@@ -155,7 +155,7 @@ impl AudioMix {
         mix.load(&[
             "module-null-sink",
             &format!("sink_name={MIX_SINK}"),
-            "sink_properties=device.description=Pinhole-Recording-Mix priority.session=0 priority.driver=0 node.passive=true",
+            "sink_properties=device.description=Screenshots-Recording-Mix priority.session=0 priority.driver=0 node.passive=true",
         ])?;
         mix.load(&[
             "module-loopback",
@@ -194,7 +194,7 @@ impl Drop for AudioMix {
     }
 }
 
-/// Unloads mix modules left behind if a previous pinhole crashed mid-recording.
+/// Unloads mix modules left behind if a previous nice-screenshots crashed mid-recording.
 pub fn remove_stale_mix() {
     let Ok(modules) = pactl(&["list", "short", "modules"]) else {
         return;
@@ -252,7 +252,7 @@ pub fn start(cfg: &Config, opts: &Options, target: &Target) -> Result<Recording,
     let backend = pick_backend(&cfg.recorder, encoding.codec)
         .ok_or("No screen recorder found. Install wf-recorder or wl-screenrec.")?;
     if let Some(note) = note {
-        util::notify("Pinhole recording settings", &note);
+        util::notify("Recording settings", &note);
     }
 
     // A microphone that has since been unplugged is skipped rather than failing the recording.
@@ -458,7 +458,7 @@ pub fn log_tail(log: &Path) -> String {
     lines[lines.len().saturating_sub(4)..].join("\n")
 }
 
-/// Writes `$XDG_RUNTIME_DIR/pinhole/status.json` so status bars can show recording state.
+/// Writes `$XDG_RUNTIME_DIR/nice-screenshots/status.json` so status bars can show recording state.
 pub fn write_status(recording: Option<&Recording>) {
     let dir = util::runtime_dir();
     let _ = fs::create_dir_all(&dir);

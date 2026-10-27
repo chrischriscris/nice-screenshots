@@ -206,8 +206,8 @@ impl Overlay {
 
         let mut windows = Vec::new();
         for (i, monitor) in monitors.iter().enumerate() {
-            let win = ui::layer_window(app, "pinhole");
-            win.add_css_class("pinhole-overlay");
+            let win = ui::layer_window(app, "nice-screenshots");
+            win.add_css_class("nice-screenshots-overlay");
             win.set_monitor(Some(monitor));
             for edge in [Edge::Top, Edge::Bottom, Edge::Left, Edge::Right] {
                 win.set_anchor(edge, true);
@@ -610,7 +610,7 @@ fn connect_keys(ctx: &Rc<Ctx>, win: &gtk::Window) {
 
 fn build_toolbar(ctx: &Rc<Ctx>) -> gtk::Box {
     let bar = gtk::Box::new(gtk::Orientation::Horizontal, 2);
-    bar.add_css_class("ph-toolbar");
+    bar.add_css_class("ns-toolbar");
     bar.set_halign(gtk::Align::Center);
     bar.set_valign(gtk::Align::End);
     bar.set_margin_bottom(56);
@@ -648,7 +648,7 @@ fn build_toolbar(ctx: &Rc<Ctx>) -> gtk::Box {
         button.set_child(Some(&icons::widget(icon, 26)));
         button.set_tooltip_text(Some(tooltip));
         button.set_focusable(false);
-        button.add_css_class("ph-mode");
+        button.add_css_class("ns-mode");
         button.set_group(group.as_ref());
         button.set_active(mode == current);
         button.connect_toggled({
@@ -672,7 +672,7 @@ fn build_toolbar(ctx: &Rc<Ctx>) -> gtk::Box {
     options.set_child(Some(&label));
     options.set_direction(gtk::ArrowType::Up);
     options.set_focusable(false);
-    options.add_css_class("ph-options");
+    options.add_css_class("ns-options");
     options.set_popover(Some(&build_options(&ctx.opts, {
         let ctx = Rc::downgrade(ctx);
         move || {
@@ -684,7 +684,7 @@ fn build_toolbar(ctx: &Rc<Ctx>) -> gtk::Box {
     bar.append(&options);
 
     let capture = gtk::Button::with_label("Capture");
-    capture.add_css_class("ph-capture");
+    capture.add_css_class("ns-capture");
     capture.set_focusable(false);
     capture.connect_clicked({
         let ctx = ctx.clone();
@@ -697,7 +697,7 @@ fn build_toolbar(ctx: &Rc<Ctx>) -> gtk::Box {
 
 fn separator() -> gtk::Separator {
     let sep = gtk::Separator::new(gtk::Orientation::Vertical);
-    sep.add_css_class("ph-sep");
+    sep.add_css_class("ns-sep");
     sep
 }
 
@@ -705,7 +705,7 @@ fn separator() -> gtk::Separator {
 /// so it is rebuilt for the current mode each time it opens.
 fn build_options(opts: &Rc<RefCell<Options>>, mode: impl Fn() -> Mode + 'static) -> gtk::Popover {
     let popover = gtk::Popover::new();
-    popover.add_css_class("ph-options-popover");
+    popover.add_css_class("ns-options-popover");
     popover.set_has_arrow(false);
     let opts = opts.clone();
     popover.connect_show(move |p| p.set_child(Some(&options_content(&opts, mode()))));
@@ -721,7 +721,7 @@ fn options_content(opts: &Rc<RefCell<Options>>, mode: Mode) -> gtk::Box {
     let heading = |text: &str| {
         let l = gtk::Label::new(Some(text));
         l.set_xalign(0.0);
-        l.add_css_class("ph-heading");
+        l.add_css_class("ns-heading");
         col.append(&l);
     };
     let check = |label: &str, get: fn(&Options) -> bool, set: fn(&mut Options, bool)| {
@@ -813,7 +813,7 @@ fn options_content(opts: &Rc<RefCell<Options>>, mode: Mode) -> gtk::Box {
     if mics.is_empty() {
         let none = gtk::Label::new(Some("No microphones found"));
         none.set_xalign(0.0);
-        none.add_css_class("ph-empty");
+        none.add_css_class("ns-empty");
         col.append(&none);
     }
     let saved = opts.borrow().microphone.clone();

@@ -17,13 +17,16 @@ pub fn spawn_detached(cmd: &mut Command) {
                 let _ = child.wait();
             });
         }
-        Err(e) => eprintln!("pinhole: failed to run {:?}: {e}", cmd.get_program()),
+        Err(e) => eprintln!(
+            "nice-screenshots: failed to run {:?}: {e}",
+            cmd.get_program()
+        ),
     }
 }
 
 pub fn notify(summary: &str, body: &str) {
-    eprintln!("pinhole: {summary}: {body}");
-    spawn_detached(Command::new("notify-send").args(["-a", "Pinhole", summary, body]));
+    eprintln!("nice-screenshots: {summary}: {body}");
+    spawn_detached(Command::new("notify-send").args(["-a", "Screenshots", summary, body]));
 }
 
 pub fn open_path(path: &Path) {
@@ -34,7 +37,7 @@ pub fn open_path(path: &Path) {
 }
 
 pub fn runtime_dir() -> PathBuf {
-    glib::user_runtime_dir().join("pinhole")
+    glib::user_runtime_dir().join("nice-screenshots")
 }
 
 pub fn state_dir() -> PathBuf {
@@ -42,7 +45,7 @@ pub fn state_dir() -> PathBuf {
         .map(PathBuf::from)
         .filter(|p| p.is_absolute())
         .unwrap_or_else(|| glib::home_dir().join(".local/state"))
-        .join("pinhole")
+        .join("nice-screenshots")
 }
 
 pub fn timestamp(format: &str) -> String {

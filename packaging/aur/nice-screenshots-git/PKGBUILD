@@ -1,11 +1,11 @@
 # Maintainer: chrischriscris <ruckrollhuke@gmail.com>
 
-pkgname=pinhole
-pkgver=0.1.0
+pkgname=nice-screenshots-git
+pkgver=0.1.0.r0.g0000000
 pkgrel=1
-pkgdesc='macOS-style screenshots and screen recordings for Hyprland and sway'
+pkgdesc='macOS-style screenshots and screen recordings for Hyprland and sway (latest commit)'
 arch=('x86_64' 'aarch64')
-url='https://github.com/chrischriscris/pinhole'
+url='https://github.com/chrischriscris/nice-screenshots'
 license=('MIT OR Apache-2.0')
 depends=('gtk4' 'gtk4-layer-shell' 'grim' 'wl-clipboard' 'glib2' 'gcc-libs' 'glibc')
 makedepends=('cargo')
@@ -18,9 +18,18 @@ optdepends=('wl-screenrec: screen recording with GPU encoding'
             'libpulse: microphone list and mixing microphone with system audio'
             'pipewire: shutter sound'
             'sound-theme-freedesktop: shutter sound')
-source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('91b12395936f1e66530192c9e91ff9d5560803a4bcaa2a78486769f7a4c45e56')
-_srcdir="$pkgname-$pkgver"
+makedepends+=('git')
+provides=('nice-screenshots')
+conflicts=('nice-screenshots')
+source=("nice-screenshots::git+$url.git")
+sha256sums=('SKIP')
+_srcdir=nice-screenshots
+
+pkgver() {
+  cd "$_srcdir"
+  git describe --long --tags --abbrev=7 2>/dev/null | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf '0.1.0.r%s.g%s' "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+}
 
 prepare() {
   cd "$_srcdir"
@@ -43,8 +52,8 @@ check() {
 
 package() {
   cd "$_srcdir"
-  install -Dm755 target/release/pinhole "$pkgdir/usr/bin/pinhole"
-  install -Dm644 data/io.github.chrischriscris.Pinhole.desktop -t "$pkgdir/usr/share/applications"
+  install -Dm755 target/release/nice-screenshots "$pkgdir/usr/bin/nice-screenshots"
+  install -Dm644 data/io.github.chrischriscris.NiceScreenshots.desktop -t "$pkgdir/usr/share/applications"
   install -Dm644 README.md -t "$pkgdir/usr/share/doc/$pkgname"
   install -Dm644 LICENSE-MIT LICENSE-APACHE -t "$pkgdir/usr/share/licenses/$pkgname"
 }

@@ -1,10 +1,11 @@
-# pinhole
+# nice-screenshots
 
 macOS-style screenshots and screen recordings for Hyprland and sway.
 
-pinhole brings the Cmd+Shift+3/4/5 workflow to wlroots-style Wayland compositors: a capture
-toolbar, a frozen-screen selection with a size readout and magnifier, window picking, a floating
-thumbnail after each capture, and screen recording that stops from your status bar.
+nice-screenshots brings the Cmd+Shift+3/4/5 workflow to wlroots-style Wayland compositors: a
+capture toolbar, a frozen-screen selection with a size readout, window picking, a floating
+thumbnail after each capture, and screen recording that stops from your status bar. In app
+launchers it shows up as **Screenshots**.
 
 ![Selecting a region: live size, handles and the capture toolbar](docs/region.png)
 
@@ -36,24 +37,24 @@ thumbnail after each capture, and screen recording that stops from your status b
 ### Arch Linux (AUR)
 
 ```sh
-paru -S pinhole        # or pinhole-git for the latest commit
+paru -S nice-screenshots        # or nice-screenshots-git for the latest commit
 ```
 
 ### Cargo
 
-pinhole needs the GTK 4 and gtk4-layer-shell development files, plus Rust 1.87 or newer.
+nice-screenshots needs the GTK 4 and gtk4-layer-shell development files, plus Rust 1.87 or newer.
 
 ```sh
-cargo install pinhole
+cargo install nice-screenshots
 ```
 
 ### From source
 
 ```sh
-git clone https://github.com/chrischriscris/pinhole
-cd pinhole
+git clone https://github.com/chrischriscris/nice-screenshots
+cd nice-screenshots
 cargo build --release
-install -Dm755 target/release/pinhole ~/.local/bin/pinhole
+install -Dm755 target/release/nice-screenshots ~/.local/bin/nice-screenshots
 ```
 
 ### Runtime dependencies
@@ -71,13 +72,13 @@ install -Dm755 target/release/pinhole ~/.local/bin/pinhole
 ## Usage
 
 ```
-pinhole                 open the toolbar (press again to stop a recording)
-pinhole screen          capture the focused screen immediately
-pinhole region          drag to capture; Space switches to window mode
-pinhole window          click a window to capture it
-pinhole record-region   toolbar in region-recording mode
-pinhole record-screen   toolbar in screen-recording mode
-pinhole stop            stop recording
+nice-screenshots                 open the toolbar (press again to stop a recording)
+nice-screenshots screen          capture the focused screen immediately
+nice-screenshots region          drag to capture; Space switches to window mode
+nice-screenshots window          click a window to capture it
+nice-screenshots record-region   toolbar in region-recording mode
+nice-screenshots record-screen   toolbar in screen-recording mode
+nice-screenshots stop            stop recording
 ```
 
 In the overlay you can:
@@ -94,21 +95,21 @@ Screenshots go to `$XDG_PICTURES_DIR/Screenshots` and the clipboard; recordings 
 ### Hyprland
 
 ```ini
-bind = , Print, exec, pinhole region                # like Cmd+Shift+4 (Space: window mode)
-bind = CONTROL, Print, exec, pinhole                # like Cmd+Shift+5 (toolbar)
-bind = SUPER, Print, exec, pinhole screen           # like Cmd+Shift+3
-bind = SUPER CONTROL, Escape, exec, pinhole stop    # like Cmd+Ctrl+Esc (stop recording)
+bind = , Print, exec, nice-screenshots region                # like Cmd+Shift+4 (Space: window mode)
+bind = CONTROL, Print, exec, nice-screenshots                # like Cmd+Shift+5 (toolbar)
+bind = SUPER, Print, exec, nice-screenshots screen           # like Cmd+Shift+3
+bind = SUPER CONTROL, Escape, exec, nice-screenshots stop    # like Cmd+Ctrl+Esc (stop recording)
 
 # Optional: no fade on the frozen overlay and the flash, blur behind the floating UI.
 layerrule {
-    name = pinhole-overlay
-    match:namespace = ^(pinhole|pinhole-flash)$
+    name = nice-screenshots-overlay
+    match:namespace = ^(nice-screenshots|nice-screenshots-flash)$
     no_anim = on
 }
 
 layerrule {
-    name = pinhole-chrome
-    match:namespace = ^(pinhole-(thumbnail|indicator|countdown))$
+    name = nice-screenshots-chrome
+    match:namespace = ^(nice-screenshots-(thumbnail|indicator|countdown))$
     blur = on
     ignore_alpha = 0.3
 }
@@ -119,10 +120,10 @@ The `layerrule` blocks use the block syntax of recent Hyprland releases (checked
 ### sway
 
 ```
-bindsym Print exec pinhole region
-bindsym Ctrl+Print exec pinhole
-bindsym Mod4+Print exec pinhole screen
-bindsym Mod4+Ctrl+Escape exec pinhole stop
+bindsym Print exec nice-screenshots region
+bindsym Ctrl+Print exec nice-screenshots
+bindsym Mod4+Print exec nice-screenshots screen
+bindsym Mod4+Ctrl+Escape exec nice-screenshots stop
 ```
 
 ## Recording
@@ -133,40 +134,40 @@ The Options menu changes with the mode, as on macOS. For recordings it offers a 
 - **Standard (Most compatible)**: H.264 at a bitrate that keeps text sharp and files small.
 - **High Quality (Larger files)**: 2.5× the bitrate, for fast motion and smooth gradients.
 
-After a recording stops, pinhole moves the MP4 index to the front and corrects the H.264 level
-(without re-encoding), so phones and chat apps play it reliably.
+After a recording stops, nice-screenshots moves the MP4 index to the front and corrects the H.264
+level (without re-encoding), so phones and chat apps play it reliably.
 
 `wl-screenrec` encodes on the GPU and is used automatically when a VA-API driver is installed;
-otherwise pinhole falls back to `wf-recorder` on the CPU. Recording the microphone and system
-audio together uses a temporary PipeWire/PulseAudio mix sink that is removed afterwards.
+otherwise nice-screenshots falls back to `wf-recorder` on the CPU. Recording the microphone and
+system audio together uses a temporary PipeWire/PulseAudio mix sink that is removed afterwards.
 
 ### Stopping from a status bar
 
-While recording, pinhole writes `$XDG_RUNTIME_DIR/pinhole/status.json`:
+While recording, nice-screenshots writes `$XDG_RUNTIME_DIR/nice-screenshots/status.json`:
 
 ```json
 {"recording": true, "started": 1793036189, "path": "/home/you/Videos/Screen Recordings/…"}
 ```
 
-A bar can show a stop button that runs `pinhole stop`, like the one in the macOS menu bar. Once
-it does, set `recording_pill = false` to hide pinhole's floating pill.
+A bar can show a stop button that runs `nice-screenshots stop`, like the one in the macOS menu
+bar. Once it does, set `recording_pill = false` to hide the floating pill.
 
 - **Quickshell**: copy [`extras/quickshell`](extras/quickshell) into your config and add
   `ScreenRecording {}` to your bar.
 - **Waybar**: a custom module, for example:
 
   ```json
-  "custom/pinhole": {
-      "exec": "jq -r 'if .recording then \"⏹\" else \"\" end' $XDG_RUNTIME_DIR/pinhole/status.json 2>/dev/null",
+  "custom/nice-screenshots": {
+      "exec": "jq -r 'if .recording then \"⏹\" else \"\" end' $XDG_RUNTIME_DIR/nice-screenshots/status.json 2>/dev/null",
       "interval": 1,
-      "on-click": "pinhole stop",
+      "on-click": "nice-screenshots stop",
       "tooltip": false
   }
   ```
 
 ## Configuration
 
-`~/.config/pinhole/config.toml`; every key is optional.
+`~/.config/nice-screenshots/config.toml`; every key is optional.
 
 ```toml
 screenshot_dir = "~/Pictures/Screenshots"         # default: $XDG_PICTURES_DIR/Screenshots
@@ -190,14 +191,14 @@ H.264 and HEVC are encoded on the GPU. VP9 and AV1 are encoded on the CPU throug
 `wf-recorder`, since few GPUs can encode them. Combinations that can't work, such as WebM with
 H.264, are corrected with a notification.
 
-The toolbar's options persist in `~/.local/state/pinhole/options.json`.
+The toolbar's options persist in `~/.local/state/nice-screenshots/options.json`.
 
 ## Notes
 
-- pinhole is tested on Hyprland and sway. Other compositors with `wlr-layer-shell` and screen
-  capture support (river, Wayfire, …) should work for screenshots and recording, but window
-  picking needs Hyprland or sway.
-- GTK themes can't restyle pinhole; it always uses its own dark look.
+- nice-screenshots is tested on Hyprland and sway. Other compositors with `wlr-layer-shell` and
+  screen capture support (river, Wayfire, …) should work for screenshots and recording, but
+  window picking needs Hyprland or sway.
+- GTK themes can't restyle nice-screenshots; it always uses its own dark look.
 - Wayland doesn't let apps see clicks outside their own windows, so there is no "Show Mouse
   Clicks" option.
 

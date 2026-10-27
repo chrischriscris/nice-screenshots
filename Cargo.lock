@@ -484,6 +484,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "nice-screenshots"
+version = "0.1.0"
+dependencies = [
+ "gtk4",
+ "gtk4-layer-shell",
+ "libc",
+ "serde",
+ "serde_json",
+ "toml 0.9.12+spec-1.1.0",
+]
+
+[[package]]
 name = "pango"
 version = "0.21.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -512,18 +524,6 @@ name = "pin-project-lite"
 version = "0.2.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a89322df9ebe1c1578d689c92318e070967d1042b512afbe49518723f4e6d5cd"
-
-[[package]]
-name = "pinhole"
-version = "0.1.0"
-dependencies = [
- "gtk4",
- "gtk4-layer-shell",
- "libc",
- "serde",
- "serde_json",
- "toml 0.9.12+spec-1.1.0",
-]
 
 [[package]]
 name = "pkg-config"

@@ -22,7 +22,7 @@ pub fn layer_window(app: &gtk::Application, namespace: &str) -> gtk::Window {
     let win = gtk::Window::new();
     win.set_application(Some(app));
     win.set_decorated(false);
-    win.add_css_class("pinhole");
+    win.add_css_class("nice-screenshots");
     win.init_layer_shell();
     win.set_layer(Layer::Overlay);
     win.set_namespace(Some(namespace));

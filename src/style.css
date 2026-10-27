@@ -1,12 +1,12 @@
 /* Loaded above the user's own gtk.css, and every class is prefixed, so desktop
-   themes can't restyle pinhole. Buttons also drop whatever a theme layers on top. */
+   themes can't restyle nice-screenshots. Buttons also drop whatever a theme layers on top. */
 
-window.pinhole {
+window.nice-screenshots {
   background: none;
   color: #f2f2f7;
 }
 
-window.pinhole button {
+window.nice-screenshots button {
   background-image: none;
   text-shadow: none;
   -gtk-icon-shadow: none;
@@ -15,7 +15,7 @@ window.pinhole button {
 
 /* Toolbar */
 
-.ph-toolbar {
+.ns-toolbar {
   background-color: rgba(30, 30, 32, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
@@ -23,7 +23,7 @@ window.pinhole button {
   box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
 }
 
-.ph-toolbar button {
+.ns-toolbar button {
   background: none;
   border: none;
   box-shadow: none;
@@ -35,26 +35,26 @@ window.pinhole button {
   transition: background-color 120ms ease;
 }
 
-.ph-toolbar button:hover {
+.ns-toolbar button:hover {
   background-color: rgba(255, 255, 255, 0.09);
 }
 
-.ph-toolbar button.ph-mode:checked {
+.ns-toolbar button.ns-mode:checked {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.ph-toolbar .ph-sep {
+.ns-toolbar .ns-sep {
   background-color: rgba(255, 255, 255, 0.14);
   min-width: 1px;
   margin: 8px 5px;
 }
 
-.ph-toolbar menubutton.ph-options > button {
+.ns-toolbar menubutton.ns-options > button {
   padding: 6px 10px;
   font-weight: 500;
 }
 
-.ph-toolbar button.ph-capture {
+.ns-toolbar button.ns-capture {
   background-color: #0a84ff;
   color: white;
   padding: 6px 18px;
@@ -62,16 +62,16 @@ window.pinhole button {
   font-weight: 600;
 }
 
-.ph-toolbar button.ph-capture:hover {
+.ns-toolbar button.ns-capture:hover {
   background-color: #2a95ff;
 }
 
-.ph-toolbar button.ph-capture:disabled {
+.ns-toolbar button.ns-capture:disabled {
   background-color: rgba(10, 132, 255, 0.35);
   color: rgba(255, 255, 255, 0.5);
 }
 
-popover.ph-options-popover > contents {
+popover.ns-options-popover > contents {
   background-color: rgba(38, 38, 40, 0.97);
   color: #f2f2f7;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -80,22 +80,22 @@ popover.ph-options-popover > contents {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
 
-popover.ph-options-popover > arrow {
+popover.ns-options-popover > arrow {
   background-color: rgba(38, 38, 40, 0.97);
   border-color: rgba(255, 255, 255, 0.1);
 }
 
-popover.ph-options-popover checkbutton {
+popover.ns-options-popover checkbutton {
   padding: 2px 0;
   color: #f2f2f7;
 }
 
-popover.ph-options-popover checkbutton label {
+popover.ns-options-popover checkbutton label {
   color: #f2f2f7;
 }
 
-popover.ph-options-popover check,
-popover.ph-options-popover radio {
+popover.ns-options-popover check,
+popover.ns-options-popover radio {
   background-color: rgba(255, 255, 255, 0.12);
   background-image: none;
   border: none;
@@ -103,17 +103,17 @@ popover.ph-options-popover radio {
   color: white;
 }
 
-popover.ph-options-popover check:checked,
-popover.ph-options-popover radio:checked {
+popover.ns-options-popover check:checked,
+popover.ns-options-popover radio:checked {
   background-color: #0a84ff;
 }
 
-.ph-empty {
+.ns-empty {
   color: rgba(235, 235, 245, 0.45);
   margin: 2px 0 2px 6px;
 }
 
-.ph-heading {
+.ns-heading {
   font-size: 0.82em;
   font-weight: 600;
   color: rgba(235, 235, 245, 0.55);
@@ -122,7 +122,7 @@ popover.ph-options-popover radio:checked {
 
 /* Floating thumbnail */
 
-.ph-card {
+.ns-card {
   background-color: rgba(30, 30, 32, 0.94);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
@@ -131,12 +131,12 @@ popover.ph-options-popover radio:checked {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
 }
 
-.ph-card .ph-preview {
+.ns-card .ns-preview {
   border-radius: 9px;
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-.ph-card .ph-badge {
+.ns-card .ns-badge {
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
   border-radius: 6px;
@@ -147,7 +147,7 @@ popover.ph-options-popover radio:checked {
   font-feature-settings: "tnum";
 }
 
-.ph-card button {
+.ns-card button {
   background: none;
   border: none;
   box-shadow: none;
@@ -158,11 +158,11 @@ popover.ph-options-popover radio:checked {
   border-radius: 8px;
 }
 
-.ph-card button:hover {
+.ns-card button:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-.ph-card button.ph-close {
+.ns-card button.ns-close {
   background-color: rgba(0, 0, 0, 0.55);
   border-radius: 999px;
   padding: 2px;
@@ -171,7 +171,7 @@ popover.ph-options-popover radio:checked {
 
 /* Countdown and recording indicator */
 
-.ph-countdown {
+.ns-countdown {
   background-color: rgba(30, 30, 32, 0.88);
   border-radius: 30px;
   min-width: 128px;
@@ -183,7 +183,7 @@ popover.ph-options-popover radio:checked {
   box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
 }
 
-.ph-pill {
+.ns-pill {
   background-color: rgba(30, 30, 32, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 999px;
@@ -192,26 +192,26 @@ popover.ph-options-popover radio:checked {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-.ph-rec-dot {
+.ns-rec-dot {
   background-color: #ff453a;
   border-radius: 999px;
   min-width: 9px;
   min-height: 9px;
-  animation: ph-rec-pulse 1.4s ease-in-out infinite;
+  animation: ns-rec-pulse 1.4s ease-in-out infinite;
 }
 
-@keyframes ph-rec-pulse {
+@keyframes ns-rec-pulse {
   0% { opacity: 1; }
   50% { opacity: 0.3; }
   100% { opacity: 1; }
 }
 
-.ph-rec-time {
+.ns-rec-time {
   font-weight: 600;
   font-feature-settings: "tnum";
 }
 
-.ph-pill button.ph-rec-stop {
+.ns-pill button.ns-rec-stop {
   background-color: rgba(255, 255, 255, 0.1);
   border: none;
   box-shadow: none;
@@ -222,6 +222,6 @@ popover.ph-options-popover radio:checked {
   padding: 4px;
 }
 
-.ph-pill button.ph-rec-stop:hover {
+.ns-pill button.ns-rec-stop:hover {
   background-color: rgba(255, 69, 58, 0.85);
 }

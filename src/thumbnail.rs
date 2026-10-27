@@ -34,7 +34,7 @@ const WIDTH: i32 = 264;
 const FADE_MS: u32 = 180;
 
 pub fn show(app: &gtk::Application, spec: Spec, cfg: &Config) -> gtk::Window {
-    let win = ui::layer_window(app, "pinhole-thumbnail");
+    let win = ui::layer_window(app, "nice-screenshots-thumbnail");
     win.set_anchor(Edge::Bottom, true);
     win.set_anchor(Edge::Right, true);
 
@@ -54,21 +54,21 @@ pub fn show(app: &gtk::Application, spec: Spec, cfg: &Config) -> gtk::Window {
     };
 
     let card = gtk::Box::new(gtk::Orientation::Vertical, 6);
-    card.add_css_class("ph-card");
+    card.add_css_class("ns-card");
 
     let stack = gtk::Overlay::new();
     stack.set_child(Some(&preview_widget(&spec)));
 
     if let Kind::Video { duration } = spec.kind {
         let badge = gtk::Label::new(Some(&util::format_duration(duration)));
-        badge.add_css_class("ph-badge");
+        badge.add_css_class("ns-badge");
         badge.set_halign(gtk::Align::Start);
         badge.set_valign(gtk::Align::End);
         stack.add_overlay(&badge);
     }
 
     let close = ui::icon_button(Icon::Close, 18, "Dismiss");
-    close.add_css_class("ph-close");
+    close.add_css_class("ns-close");
     close.set_halign(gtk::Align::End);
     close.set_valign(gtk::Align::Start);
     close.connect_clicked({
@@ -79,7 +79,7 @@ pub fn show(app: &gtk::Application, spec: Spec, cfg: &Config) -> gtk::Window {
     card.append(&stack);
 
     let actions = gtk::Box::new(gtk::Orientation::Horizontal, 2);
-    actions.add_css_class("ph-actions");
+    actions.add_css_class("ns-actions");
     actions.set_homogeneous(true);
     let path = Rc::new(spec.path.clone());
 
@@ -194,7 +194,7 @@ fn preview_widget(spec: &Spec) -> gtk::Widget {
         .and_then(|pix| capture::to_surface(&pix).ok());
     let Some(image) = image else {
         let placeholder = gtk::Box::new(gtk::Orientation::Vertical, 0);
-        placeholder.add_css_class("ph-preview");
+        placeholder.add_css_class("ns-preview");
         placeholder.set_size_request(WIDTH, WIDTH * 9 / 16);
         let icon = icons::widget(Icon::Play, 40);
         icon.set_vexpand(true);

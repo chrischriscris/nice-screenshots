@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Name=Pinhole
+Name=Screenshots
 GenericName=Screenshot
 Comment=Take screenshots and record the screen
-Exec=pinhole
+Exec=nice-screenshots
 Icon=applets-screenshooter
 Terminal=false
 Categories=Utility;
@@ -13,20 +13,20 @@ Actions=Region;Window;Screen;RecordRegion;RecordScreen;
 
 [Desktop Action Region]
 Name=Capture Selected Portion
-Exec=pinhole region
+Exec=nice-screenshots region
 
 [Desktop Action Window]
 Name=Capture Window
-Exec=pinhole window
+Exec=nice-screenshots window
 
 [Desktop Action Screen]
 Name=Capture Entire Screen
-Exec=pinhole screen
+Exec=nice-screenshots screen
 
 [Desktop Action RecordRegion]
 Name=Record Selected Portion
-Exec=pinhole record-region
+Exec=nice-screenshots record-region
 
 [Desktop Action RecordScreen]
 Name=Record Entire Screen
-Exec=pinhole record-screen
+Exec=nice-screenshots record-screen

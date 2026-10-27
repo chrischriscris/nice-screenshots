@@ -1,8 +1,8 @@
-pkgbase = pinhole-git
+pkgbase = nice-screenshots-git
 	pkgdesc = macOS-style screenshots and screen recordings for Hyprland and sway (latest commit)
 	pkgver = 0.1.0.r0.g0000000
 	pkgrel = 1
-	url = https://github.com/chrischriscris/pinhole
+	url = https://github.com/chrischriscris/nice-screenshots
 	arch = x86_64
 	arch = aarch64
 	license = MIT OR Apache-2.0
@@ -24,9 +24,9 @@ pkgbase = pinhole-git
 	optdepends = libpulse: microphone list and mixing microphone with system audio
 	optdepends = pipewire: shutter sound
 	optdepends = sound-theme-freedesktop: shutter sound
-	provides = pinhole
-	conflicts = pinhole
-	source = pinhole::git+https://github.com/chrischriscris/pinhole.git
+	provides = nice-screenshots
+	conflicts = nice-screenshots
+	source = nice-screenshots::git+https://github.com/chrischriscris/nice-screenshots.git
 	sha256sums = SKIP
 
-pkgname = pinhole-git
+pkgname = nice-screenshots-git
