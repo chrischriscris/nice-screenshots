@@ -19,7 +19,7 @@ optdepends=('wl-screenrec: screen recording with GPU encoding'
             'pipewire: shutter sound'
             'sound-theme-freedesktop: shutter sound')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('91b12395936f1e66530192c9e91ff9d5560803a4bcaa2a78486769f7a4c45e56')
+sha256sums=('0810d5100ccd66d108173b98fb4de2df3475e6db6fcf286e3dabe2c1ba1a7e04')
 _srcdir="$pkgname-$pkgver"
 
 prepare() {

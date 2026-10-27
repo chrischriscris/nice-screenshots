@@ -24,6 +24,6 @@ pkgbase = nice-screenshots
 	optdepends = pipewire: shutter sound
 	optdepends = sound-theme-freedesktop: shutter sound
 	source = nice-screenshots-0.1.0.tar.gz::https://github.com/chrischriscris/nice-screenshots/archive/refs/tags/v0.1.0.tar.gz
-	sha256sums = 91b12395936f1e66530192c9e91ff9d5560803a4bcaa2a78486769f7a4c45e56
+	sha256sums = 0810d5100ccd66d108173b98fb4de2df3475e6db6fcf286e3dabe2c1ba1a7e04
 
 pkgname = nice-screenshots
