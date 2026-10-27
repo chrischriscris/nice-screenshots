@@ -24,6 +24,6 @@ pkgbase = pinhole
 	optdepends = pipewire: shutter sound
 	optdepends = sound-theme-freedesktop: shutter sound
 	source = pinhole-0.1.0.tar.gz::https://github.com/chrischriscris/pinhole/archive/refs/tags/v0.1.0.tar.gz
-	sha256sums = SKIP
+	sha256sums = 91b12395936f1e66530192c9e91ff9d5560803a4bcaa2a78486769f7a4c45e56
 
 pkgname = pinhole
