@@ -61,7 +61,7 @@ Then install the runtime tools (Arch names; find the equivalents elsewhere):
 | Everything | `grim`, `wl-clipboard` |
 | Recording | `wl-screenrec` (GPU, preferred) or `wf-recorder` (CPU) |
 | Share-friendly MP4s and previews | `ffmpeg` |
-| Mark up | `satty` or `swappy` |
+| Mark up (the thumbnail's pencil button) | `satty` (recommended) or `swappy` |
 | Microphone and system audio | `libpulse` (provides `pactl`, works with PipeWire) |
 | Shutter sound | `pipewire` and `sound-theme-freedesktop` |
 | Error notifications | `libnotify` |

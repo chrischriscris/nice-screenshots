@@ -251,7 +251,10 @@ fn open_editor(editor: &str, path: &Path) {
     } else if util::which("swappy") {
         ["swappy", "-f", &p, "-o", &p].map(String::from).to_vec()
     } else {
-        util::open_path(path);
+        util::notify(
+            "No markup editor",
+            "Install satty or swappy to mark up screenshots, or set `editor` in config.toml.",
+        );
         return;
     };
     util::spawn_detached(Command::new(&argv[0]).args(&argv[1..]));

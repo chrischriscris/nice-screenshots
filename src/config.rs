@@ -18,7 +18,7 @@ pub struct Config {
     /// strftime-style file name patterns (without extension).
     pub screenshot_name: String,
     pub recording_name: String,
-    /// "auto" (satty, swappy, then the default image viewer) or a command; `{}` is replaced by the file path.
+    /// "auto" (satty, then swappy) or a command; `{}` is replaced by the file path.
     pub editor: String,
     /// "auto", "wl-screenrec" or "wf-recorder".
     pub recorder: String,
