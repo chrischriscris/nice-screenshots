@@ -1,106 +1,45 @@
-# nice-screenshots
+<div align="center">
 
-macOS-style screenshots and screen recordings for Hyprland and sway.
+# Nice Screenshots
 
-nice-screenshots brings the Cmd+Shift+3/4/5 workflow to wlroots-style Wayland compositors: a
-capture toolbar, a frozen-screen selection with a size readout, window picking, a floating
-thumbnail after each capture, and screen recording that stops from your status bar. In app
-launchers it shows up as **Screenshots**.
+**macOS-style screenshots and screen recording for Hyprland and sway.**
 
-![Selecting a region: live size, handles and the capture toolbar](docs/region.png)
+![Selecting a region with the capture toolbar](docs/region.png)
 
-## Features
-
-- **Capture toolbar** (like Cmd+Shift+5): entire screen, a window, or a selected portion;
-  record the screen or a portion; options; Capture/Record.
-- **Frozen-frame selection**: the screen freezes while you choose, so menus and tooltips stay
-  put. Crosshair guides with coordinates, resize handles, a live `W × H` readout, arrow-key
-  nudging, and it remembers your last selection. An optional pixel magnifier helps with
-  pixel-exact picks.
-- **Window picking**: hover to highlight a window, click to capture it. Press Space to switch
-  between selecting a region and picking a window, as on macOS.
-- **Capture feedback**: the captured area flashes and a shutter sound plays.
-- **Floating thumbnail**: copy, mark up (Satty or swappy), show in folder, or delete. Drag it
-  straight into other apps.
-- **Screen recording**: GPU-encoded H.264 by default, microphone and/or system audio, and files
-  that play everywhere (WhatsApp, Slack, Discord, browsers). Stop it from your status bar, with a
-  shortcut, or from the floating pill.
-
-| Window picking | Options |
-| --- | --- |
-| ![Window mode highlights the window under the pointer](docs/window.png) | ![Options menu in recording mode](docs/options.png) |
-
-![Floating thumbnail after a capture](docs/thumbnail.png)
+</div>
 
 ## Install
 
-### Arch Linux (AUR)
-
-```sh
-paru -S nice-screenshots        # or nice-screenshots-git for the latest commit
-```
-
-### Cargo
-
-nice-screenshots needs the GTK 4 and gtk4-layer-shell development files, plus Rust 1.87 or newer.
-
-```sh
-cargo install nice-screenshots
-```
-
-### From source
-
-```sh
-git clone https://github.com/chrischriscris/nice-screenshots
-cd nice-screenshots
-cargo build --release
-install -Dm755 target/release/nice-screenshots ~/.local/bin/nice-screenshots
-```
-
-### Runtime dependencies
-
-| Needed for | Packages (Arch names) |
-| --- | --- |
-| Everything | `gtk4`, `gtk4-layer-shell`, `grim`, `wl-clipboard` |
-| Recording | `wl-screenrec` (GPU encoding, needs a VA-API driver such as `intel-media-driver`) or `wf-recorder` |
-| Share-friendly MP4s, video previews | `ffmpeg` |
-| Mark up | `satty` or `swappy` |
-| Microphone list, mixing mic + system audio | `libpulse` (`pactl`, works with PipeWire) |
-| Shutter sound | `pipewire` (`pw-play`) and `sound-theme-freedesktop` |
-| Error notifications | `libnotify` |
-
-## Usage
+Paste this into Claude Code, Codex, Cursor or any coding agent. It installs everything and sets
+up your shortcuts:
 
 ```
-nice-screenshots                 open the toolbar (press again to stop a recording)
-nice-screenshots screen          capture the focused screen immediately
-nice-screenshots region          drag to capture; Space switches to window mode
-nice-screenshots window          click a window to capture it
-nice-screenshots record-region   toolbar in region-recording mode
-nice-screenshots record-screen   toolbar in screen-recording mode
-nice-screenshots stop            stop recording
+Install and set up nice-screenshots on this computer by following
+https://raw.githubusercontent.com/chrischriscris/nice-screenshots/main/docs/agent-setup.md
+Ask me before using sudo or changing my config files.
 ```
 
-In the overlay you can:
+Or by hand: `paru -S nice-screenshots`, then [add the shortcuts](#shortcuts).
 
-- Drag to select, then drag the handles to resize or drag inside to move.
-- Nudge the selection with the arrow keys (Shift moves 10 px, Alt resizes instead).
-- Press Space to switch between selecting a region and picking a window.
-- Press Enter or double-click to capture.
-- Press Esc or right-click to cancel.
+## Shortcuts
 
-Screenshots go to `$XDG_PICTURES_DIR/Screenshots` and the clipboard; recordings go to
-`$XDG_VIDEOS_DIR/Screen Recordings`. Both are configurable.
+| Keys | Does | On macOS |
+| --- | --- | --- |
+| <kbd>Print</kbd> | Select a region (<kbd>Space</kbd> picks a window instead) | <kbd>⌘</kbd><kbd>⇧</kbd><kbd>4</kbd> |
+| <kbd>Ctrl</kbd> <kbd>Print</kbd> | Toolbar: screenshots and recording | <kbd>⌘</kbd><kbd>⇧</kbd><kbd>5</kbd> |
+| <kbd>Super</kbd> <kbd>Print</kbd> | Capture the whole screen | <kbd>⌘</kbd><kbd>⇧</kbd><kbd>3</kbd> |
+| <kbd>Super</kbd> <kbd>Ctrl</kbd> <kbd>Esc</kbd> | Stop recording | <kbd>⌘</kbd><kbd>⌃</kbd><kbd>Esc</kbd> |
 
-### Hyprland
+<details>
+<summary>Hyprland config</summary>
 
 ```ini
-bind = , Print, exec, nice-screenshots region                # like Cmd+Shift+4 (Space: window mode)
-bind = CONTROL, Print, exec, nice-screenshots                # like Cmd+Shift+5 (toolbar)
-bind = SUPER, Print, exec, nice-screenshots screen           # like Cmd+Shift+3
-bind = SUPER CONTROL, Escape, exec, nice-screenshots stop    # like Cmd+Ctrl+Esc (stop recording)
+bind = , Print, exec, nice-screenshots region
+bind = CONTROL, Print, exec, nice-screenshots
+bind = SUPER, Print, exec, nice-screenshots screen
+bind = SUPER CONTROL, Escape, exec, nice-screenshots stop
 
-# Optional: no fade on the frozen overlay and the flash, blur behind the floating UI.
+# Optional: no fade on the frozen overlay, blur behind the floating UI (Hyprland 0.56 syntax)
 layerrule {
     name = nice-screenshots-overlay
     match:namespace = ^(nice-screenshots|nice-screenshots-flash)$
@@ -115,9 +54,10 @@ layerrule {
 }
 ```
 
-The `layerrule` blocks use the block syntax of recent Hyprland releases (checked with 0.56).
+</details>
 
-### sway
+<details>
+<summary>sway config</summary>
 
 ```
 bindsym Print exec nice-screenshots region
@@ -126,35 +66,68 @@ bindsym Mod4+Print exec nice-screenshots screen
 bindsym Mod4+Ctrl+Escape exec nice-screenshots stop
 ```
 
-## Recording
+</details>
 
-The Options menu changes with the mode, as on macOS. For recordings it offers a microphone,
-**Include System Audio**, **Show Mouse Pointer**, and the quality:
+## Features
 
-- **Standard (Most compatible)**: H.264 at a bitrate that keeps text sharp and files small.
-- **High Quality (Larger files)**: 2.5× the bitrate, for fast motion and smooth gradients.
+- **Frozen screen** while you select: menus and tooltips stay put
+- **Window picking**, with a highlight under the pointer
+- **Floating thumbnail**: copy, mark up, show in folder, delete, or drag into any app
+- **Recording** on the GPU, with mic and system audio, in files that play on WhatsApp, Slack and
+  Discord
+- **Stop button in your bar**, like the macOS menu bar
+- Flash and shutter sound, size readout, resize handles, arrow-key nudging
 
-After a recording stops, nice-screenshots moves the MP4 index to the front and corrects the H.264
-level (without re-encoding), so phones and chat apps play it reliably.
+| Window picking | Options | Thumbnail |
+| --- | --- | --- |
+| ![Window mode](docs/window.png) | ![Options menu](docs/options.png) | ![Thumbnail](docs/thumbnail.png) |
 
-`wl-screenrec` encodes on the GPU and is used automatically when a VA-API driver is installed;
-otherwise nice-screenshots falls back to `wf-recorder` on the CPU. Recording the microphone and
-system audio together uses a temporary PipeWire/PulseAudio mix sink that is removed afterwards.
+## More
 
-### Stopping from a status bar
+<details>
+<summary>Commands and selection keys</summary>
 
-While recording, nice-screenshots writes `$XDG_RUNTIME_DIR/nice-screenshots/status.json`:
-
-```json
-{"recording": true, "started": 1793036189, "path": "/home/you/Videos/Screen Recordings/…"}
+```
+nice-screenshots                 toolbar (run again to stop a recording)
+nice-screenshots region          select a region; Space switches to window mode
+nice-screenshots window          click a window
+nice-screenshots screen          capture the focused screen now
+nice-screenshots record-region   toolbar in region-recording mode
+nice-screenshots record-screen   toolbar in screen-recording mode
+nice-screenshots stop            stop recording
 ```
 
-A bar can show a stop button that runs `nice-screenshots stop`, like the one in the macOS menu
-bar. Once it does, set `recording_pill = false` to hide the floating pill.
+While selecting: drag the handles to resize or drag inside to move. Arrow keys nudge (Shift: 10
+px, Alt: resize). Enter or double-click captures. Esc or right-click cancels.
 
-- **Quickshell**: copy [`extras/quickshell`](extras/quickshell) into your config and add
-  `ScreenRecording {}` to your bar.
-- **Waybar**: a custom module, for example:
+Screenshots go to `~/Pictures/Screenshots` and the clipboard, recordings to
+`~/Videos/Screen Recordings`.
+
+</details>
+
+<details>
+<summary>Recording</summary>
+
+The toolbar's **Options** menu picks the microphone, system audio, mouse pointer and quality:
+
+- **Standard**: H.264 that keeps text sharp and files small.
+- **High Quality**: 2.5× the bitrate, for fast motion.
+
+`wl-screenrec` encodes on the GPU when a VA-API driver is installed; otherwise `wf-recorder` is
+used. After stopping, the MP4 is fixed up without re-encoding so phones and chat apps play it.
+
+</details>
+
+<details>
+<summary>Stop button in your status bar</summary>
+
+While recording, `$XDG_RUNTIME_DIR/nice-screenshots/status.json` contains
+`{"recording": true, "started": <unix time>, "path": "…"}`. Show a button that runs
+`nice-screenshots stop`, then set `recording_pill = false` to hide the floating pill.
+
+- **Quickshell**: copy [`extras/quickshell`](extras/quickshell) and add `ScreenRecording {}` to
+  your bar.
+- **Waybar**:
 
   ```json
   "custom/nice-screenshots": {
@@ -165,7 +138,10 @@ bar. Once it does, set `recording_pill = false` to hide the floating pill.
   }
   ```
 
-## Configuration
+</details>
+
+<details>
+<summary>Configuration</summary>
 
 `~/.config/nice-screenshots/config.toml`; every key is optional.
 
@@ -181,28 +157,48 @@ magnifier = false          # pixel magnifier next to the pointer while selecting
 flash = true               # flash the captured area
 sound = true               # play the camera shutter sound
 
-recording_codec = "h264"   # "h264" (plays everywhere), "hevc" (smaller), "vp9" or "av1"
+recording_codec = "h264"   # "h264" (plays everywhere), "hevc" (smaller), "vp9" or "av1" (CPU)
 recording_format = "mp4"   # "mp4", "mkv" (survives crashes) or "webm" (VP9/AV1 only)
-recording_fps = 0          # cap the frame rate, e.g. 30; 0 = up to the display's refresh rate
+recording_fps = 0          # cap the frame rate, e.g. 30; 0 = the display's refresh rate
 recording_pill = true      # floating timer and stop button while recording
 ```
 
-H.264 and HEVC are encoded on the GPU. VP9 and AV1 are encoded on the CPU through
-`wf-recorder`, since few GPUs can encode them. Combinations that can't work, such as WebM with
-H.264, are corrected with a notification.
+Toolbar options are remembered in `~/.local/state/nice-screenshots/options.json`.
 
-The toolbar's options persist in `~/.local/state/nice-screenshots/options.json`.
+</details>
 
-## Notes
+<details>
+<summary>Other ways to install, and dependencies</summary>
 
-- nice-screenshots is tested on Hyprland and sway. Other compositors with `wlr-layer-shell` and
-  screen capture support (river, Wayfire, …) should work for screenshots and recording, but
-  window picking needs Hyprland or sway.
-- GTK themes can't restyle nice-screenshots; it always uses its own dark look.
-- Wayland doesn't let apps see clicks outside their own windows, so there is no "Show Mouse
-  Clicks" option.
+```sh
+paru -S nice-screenshots-git    # latest commit
+cargo install nice-screenshots  # needs GTK 4 + gtk4-layer-shell dev files, Rust 1.87+
+```
+
+| For | Packages (Arch names) |
+| --- | --- |
+| Everything | `gtk4` `gtk4-layer-shell` `grim` `wl-clipboard` |
+| Recording | `wl-screenrec` (GPU, needs e.g. `intel-media-driver`) or `wf-recorder` |
+| Share-friendly MP4s | `ffmpeg` |
+| Mark up | `satty` or `swappy` |
+| Mic and system audio | `libpulse` (works with PipeWire) |
+| Shutter sound | `pipewire` `sound-theme-freedesktop` |
+| Notifications | `libnotify` |
+
+</details>
+
+<details>
+<summary>Compatibility</summary>
+
+- **Hyprland, sway**: everything.
+- **river, Wayfire, labwc, niri**: screenshots and recording should work; window picking doesn't.
+- **GNOME, KDE Plasma, X11**: not supported yet.
+
+GTK themes don't restyle it. There's no "Show Mouse Clicks", since Wayland doesn't let apps see
+clicks outside their windows.
+
+</details>
 
 ## License
 
-Licensed under either of [Apache License, Version 2.0](LICENSE-APACHE) or
-[MIT license](LICENSE-MIT) at your option.
+[MIT](LICENSE-MIT) or [Apache 2.0](LICENSE-APACHE), at your option.

@@ -26,7 +26,7 @@ pub fn spawn_detached(cmd: &mut Command) {
 
 pub fn notify(summary: &str, body: &str) {
     eprintln!("nice-screenshots: {summary}: {body}");
-    spawn_detached(Command::new("notify-send").args(["-a", "Screenshots", summary, body]));
+    spawn_detached(Command::new("notify-send").args(["-a", "Nice Screenshots", summary, body]));
 }
 
 pub fn open_path(path: &Path) {

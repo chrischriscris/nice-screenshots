@@ -9,7 +9,7 @@ repository = "https://github.com/chrischriscris/nice-screenshots"
 readme = "README.md"
 keywords = ["screenshot", "screen-recording", "wayland", "hyprland", "sway"]
 categories = ["multimedia::images", "multimedia::video", "gui"]
-exclude = ["/docs", "/.github", "/packaging", "/extras"]
+exclude = ["/docs", "/.github", "/packaging", "/extras", "/AGENTS.md"]
 
 [dependencies]
 gtk = { package = "gtk4", version = "0.10", features = ["v4_12"] }

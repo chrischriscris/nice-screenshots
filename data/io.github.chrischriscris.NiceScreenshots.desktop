@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=Screenshots
+Name=Nice Screenshots
 GenericName=Screenshot
 Comment=Take screenshots and record the screen
 Exec=nice-screenshots
